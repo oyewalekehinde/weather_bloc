@@ -1,7 +1,10 @@
 part of 'currentweather_bloc.dart';
 
 @immutable
-abstract class CurrentweatherState {}
+abstract class CurrentweatherState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
 
 class CurrentweatherInitial extends CurrentweatherState {}
 

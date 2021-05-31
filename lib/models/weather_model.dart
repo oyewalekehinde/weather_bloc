@@ -1,4 +1,6 @@
-class Weather {
+import 'package:equatable/equatable.dart';
+
+class Weather extends Equatable {
   Weather({
     this.coord,
     this.weather,
@@ -15,19 +17,19 @@ class Weather {
     this.cod,
   });
 
-  Coord coord;
-  List<WeatherElement> weather;
-  String base;
-  Main main;
-  int visibility;
-  Wind wind;
-  Clouds clouds;
-  int dt;
-  Sys sys;
-  int timezone;
-  int id;
-  String name;
-  int cod;
+  final Coord coord;
+  final List<WeatherElement> weather;
+  final String base;
+  final Main main;
+  final int visibility;
+  final Wind wind;
+  final Clouds clouds;
+  final int dt;
+  final Sys sys;
+  final int timezone;
+  final int id;
+  final String name;
+  final int cod;
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         coord: json["coord"] == null ? null : Coord.fromJson(json["coord"]),
@@ -65,14 +67,31 @@ class Weather {
         "name": name == null ? null : name,
         "cod": cod == null ? null : cod,
       };
+
+  @override
+  List<Object> get props => [
+        coord,
+        weather,
+        base,
+        main,
+        visibility,
+        wind,
+        clouds,
+        dt,
+        sys,
+        timezone,
+        id,
+        name,
+        cod,
+      ];
 }
 
-class Clouds {
+class Clouds extends Equatable {
   Clouds({
     this.all,
   });
 
-  int all;
+  final int all;
 
   factory Clouds.fromJson(Map<String, dynamic> json) => Clouds(
         all: json["all"] == null ? null : json["all"],
@@ -81,16 +100,19 @@ class Clouds {
   Map<String, dynamic> toJson() => {
         "all": all == null ? null : all,
       };
+
+  @override
+  List<Object> get props => [all];
 }
 
-class Coord {
+class Coord extends Equatable {
   Coord({
     this.lon,
     this.lat,
   });
 
-  double lon;
-  double lat;
+  final double lon;
+  final double lat;
 
   factory Coord.fromJson(Map<String, dynamic> json) => Coord(
         lon: json["lon"] == null ? null : json["lon"].toDouble(),
@@ -101,9 +123,11 @@ class Coord {
         "lon": lon == null ? null : lon,
         "lat": lat == null ? null : lat,
       };
+  @override
+  List<Object> get props => [lon, lat];
 }
 
-class Main {
+class Main extends Equatable {
   Main({
     this.temp,
     this.feelsLike,
@@ -115,14 +139,14 @@ class Main {
     this.grndLevel,
   });
 
-  double temp;
-  double feelsLike;
-  double tempMin;
-  double tempMax;
-  int pressure;
-  int humidity;
-  int seaLevel;
-  int grndLevel;
+  final double temp;
+  final double feelsLike;
+  final double tempMin;
+  final double tempMax;
+  final int pressure;
+  final int humidity;
+  final int seaLevel;
+  final int grndLevel;
 
   factory Main.fromJson(Map<String, dynamic> json) => Main(
         temp: json["temp"] == null ? null : json["temp"].toDouble(),
@@ -146,9 +170,21 @@ class Main {
         "sea_level": seaLevel == null ? null : seaLevel,
         "grnd_level": grndLevel == null ? null : grndLevel,
       };
+
+  @override
+  List<Object> get props => [
+        feelsLike,
+        temp,
+        tempMin,
+        tempMax,
+        pressure,
+        humidity,
+        seaLevel,
+        grndLevel,
+      ];
 }
 
-class Sys {
+class Sys extends Equatable {
   Sys({
     this.type,
     this.id,
@@ -157,11 +193,11 @@ class Sys {
     this.sunset,
   });
 
-  int type;
-  int id;
-  String country;
-  int sunrise;
-  int sunset;
+  final int type;
+  final int id;
+  final String country;
+  final int sunrise;
+  final int sunset;
 
   factory Sys.fromJson(Map<String, dynamic> json) => Sys(
         type: json["type"] == null ? null : json["type"],
@@ -178,9 +214,11 @@ class Sys {
         "sunrise": sunrise == null ? null : sunrise,
         "sunset": sunset == null ? null : sunset,
       };
+  @override
+  List<Object> get props => [type, id, country, sunrise, sunset];
 }
 
-class WeatherElement {
+class WeatherElement extends Equatable {
   WeatherElement({
     this.id,
     this.main,
@@ -188,10 +226,10 @@ class WeatherElement {
     this.icon,
   });
 
-  int id;
-  String main;
-  String description;
-  String icon;
+  final int id;
+  final String main;
+  final String description;
+  final String icon;
 
   factory WeatherElement.fromJson(Map<String, dynamic> json) => WeatherElement(
         id: json["id"] == null ? null : json["id"],
@@ -206,18 +244,20 @@ class WeatherElement {
         "description": description == null ? null : description,
         "icon": icon == null ? null : icon,
       };
+  @override
+  List<Object> get props => [id, main, description, icon];
 }
 
-class Wind {
+class Wind extends Equatable {
   Wind({
     this.speed,
     this.deg,
     this.gust,
   });
 
-  double speed;
-  int deg;
-  double gust;
+  final double speed;
+  final int deg;
+  final double gust;
 
   factory Wind.fromJson(Map<String, dynamic> json) => Wind(
         speed: json["speed"] == null ? null : json["speed"].toDouble(),
@@ -230,4 +270,7 @@ class Wind {
         "deg": deg == null ? null : deg,
         "gust": gust == null ? null : gust,
       };
+
+  @override
+  List<Object> get props => [speed, deg, gust];
 }

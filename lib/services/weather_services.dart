@@ -1,19 +1,22 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:weather_bloc/models/weather_model.dart';
 import 'package:http/http.dart' as http;
 
 const String API_KEY = "60f988bd707e9624b1fc62ad190c8c6c";
 const String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
 
-class WeatherServices {
-  static Future<Weather> getWeatherByCityName(String cityName) async {
+abstract class WeatherHttp {
+  Future<Weather> getWeatherByCityName();
+}
+
+class WeatherServices implements WeatherHttp {
+  Future<Weather> getWeatherByCityName({@required String cityName}) async {
     final String url = "$BASE_URL$cityName&appid=$API_KEY";
     try {
-      var response = await Future.delayed(
-          Duration(seconds: 5), () => http.get(Uri.parse(url)));
-      print("you gat me");
+      var response = await http.get(Uri.parse(url));
+      print(response.statusCode);
       switch (response.statusCode) {
         case 200:
           var responseBody = jsonDecode(response.body);
