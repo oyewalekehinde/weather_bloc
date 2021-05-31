@@ -16,7 +16,6 @@ class WeatherServices implements WeatherHttp {
     final String url = "$BASE_URL$cityName&appid=$API_KEY";
     try {
       var response = await http.get(Uri.parse(url));
-      print(response.statusCode);
       switch (response.statusCode) {
         case 200:
           var responseBody = jsonDecode(response.body);
