@@ -5,5 +5,5 @@ void main() {
   blocTest("should get CityNameEvent State",
       build: () => CurrentweatherBloc(),
       act: (bloc) => bloc.add(CityNameEvent("lagos")),
-      expect: () => [CurrentWeatherLoading(), CurrentWeatherFailed()]);
+      expect: () => [CurrentWeatherLoading(), CurrentWeatherSuccess()]);
 }
