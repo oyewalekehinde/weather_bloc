@@ -18,7 +18,7 @@ void main() {
   final weather = Weather();
 
   test(
-    "should get current weather from repoitory",
+    "should get current weather from repository",
     () async {
       when(mockGetWeather.getCurrentWeather(any))
           .thenAnswer((_) async => weather);

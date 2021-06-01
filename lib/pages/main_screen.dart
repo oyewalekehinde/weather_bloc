@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,31 +65,11 @@ class MainScreen extends StatelessWidget {
                         } else if (state is CurrentWeatherSuccess) {
                           return Column(
                             children: [
-                              Container(
-                                color: Colors.red,
-                                child: Column(
-                                  children: [
-                                    Text("${state.weather.name}"),
-                                    Text("${DateTime.now()}")
-                                  ],
-                                ),
+                              Text("${state.weather.name.toUpperCase()}"),
+                              Text(
+                                "${(state.weather.main.temp - 273).toStringAsFixed(1)}",
+                                style: TextStyle(fontSize: 45),
                               ),
-                              Container(
-                                color: Colors.green,
-                                child: Column(
-                                  children: [
-                                    Text("${state.weather.main.temp - 273}℃"),
-                                    Text("------------"),
-                                    Text("${state.weather.weather.first.main}"),
-                                    Text(
-                                        "${state.weather.main.tempMin - 273}℃/${state.weather.main.tempMax - 273}℃")
-                                  ],
-                                ),
-                              ),
-                              Icon(Icons.delete),
-                              Row(
-                                children: [],
-                              )
                             ],
                           );
                         } else if (state is CurrentWeatherFailed) {
