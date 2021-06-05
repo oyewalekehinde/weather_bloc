@@ -79,7 +79,7 @@ class MainScreen extends StatelessWidget {
                                 Text("${state.weather.name.toUpperCase()}"),
                                 Text(
                                   "${(state.weather.main.temp - 273).toStringAsFixed(1)}",
-                                  style: TextStyle(fontSize: 70),
+                                  style: TextStyle(fontSize: 80),
                                 ),
                               ],
                             ),
