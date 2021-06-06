@@ -11,7 +11,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("I am rebuilding");
     final double screenHeight = MediaQuery.of(context).size.height / 100;
     final double screenWidth = MediaQuery.of(context).size.width / 100;
     return Scaffold(
@@ -25,6 +24,7 @@ class MainScreen extends StatelessWidget {
               children: [
                 Container(
                   child: TextField(
+                    key: ValueKey("Enter city"),
                     controller: _controller,
                     textInputAction: TextInputAction.done,
                     keyboardType: TextInputType.text,
