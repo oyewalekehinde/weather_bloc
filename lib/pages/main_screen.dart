@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_bloc/bloc/current_weather/currentweather_bloc.dart';
-import 'package:weather_bloc/utils/get_weather_image.dart';
+import 'package:weather_bloc/widget/weather_widget.dart';
 
 class MainScreen extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
@@ -12,8 +11,9 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height / 100;
-    double screenWidth = MediaQuery.of(context).size.width / 100;
+    print("I am rebuilding");
+    final double screenHeight = MediaQuery.of(context).size.height / 100;
+    final double screenWidth = MediaQuery.of(context).size.width / 100;
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text("Weather App")),
@@ -56,40 +56,28 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  height: screenHeight * 60,
-                  width: screenWidth * 100,
-                  child: BlocBuilder<CurrentweatherBloc, CurrentweatherState>(
-                      bloc: _currentBloc,
-                      builder: (context, state) {
-                        if (state is CurrentWeatherLoading) {
-                          return Center(child: CircularProgressIndicator());
-                        } else if (state is CurrentWeatherSuccess) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                      "assets/" +
-                                          weatherIcon(state.weather.weather
-                                              .first.description),
-                                    ),
-                                    fit: BoxFit.cover)),
-                            child: Column(
-                              children: [
-                                Text("${state.weather.name.toUpperCase()}"),
-                                Text(
-                                  "${(state.weather.main.temp - 273).toStringAsFixed(1)}",
-                                  style: TextStyle(fontSize: 80),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else if (state is CurrentWeatherFailed) {
-                          return Text("${state.message}");
-                        } else {
-                          return SizedBox.shrink();
-                        }
-                      }),
+                Expanded(
+                  child: Container(
+                    // height: screenHeight * 60,
+                    width: screenWidth * 100,
+                    child: BlocBuilder<CurrentweatherBloc, CurrentweatherState>(
+                        bloc: _currentBloc,
+                        builder: (context, state) {
+                          if (state is CurrentWeatherLoading) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (state is CurrentWeatherSuccess) {
+                            return WeatherWidget(weather: state.weather);
+                          } else if (state is CurrentWeatherFailed) {
+                            return Center(
+                                child: Text(
+                              "${state.message}",
+                              style: TextStyle(fontSize: 25),
+                            ));
+                          } else {
+                            return SizedBox.shrink();
+                          }
+                        }),
+                  ),
                 ),
               ],
             ),

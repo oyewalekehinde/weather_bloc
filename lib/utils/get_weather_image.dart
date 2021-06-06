@@ -11,10 +11,11 @@ String weatherIcon(String condition) {
     case "broken clouds":
       return "broken_clouds.jpg";
       break;
-    case "scattered_clouds":
+    case "scattered clouds":
       return "scattered_cloud.jpg";
       break;
     case "shower rain":
+    case "light rain":
       return "shower_rain.jpg";
       break;
     case "rain":

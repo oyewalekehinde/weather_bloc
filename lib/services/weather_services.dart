@@ -26,7 +26,7 @@ class WeatherServices implements WeatherHttp {
         case 404:
           throw Exception("Error loading page");
         default:
-          throw Exception("Looking for the error");
+          throw "City Not Found";
       }
     } catch (e) {
       if (e is SocketException) {
