@@ -17,6 +17,13 @@ class MainScreen extends StatelessWidget {
         appBar: AppBar(
           title: Center(child: Text("Weather App")),
         ),
+        floatingActionButton: FloatingActionButton(
+          key: ValueKey("button"),
+          child: Icon(Icons.search),
+          onPressed: () {
+            _currentBloc.add(CityNameEvent(_controller.text));
+          },
+        ),
         body: Container(
           height: screenHeight * 100,
           child: SafeArea(

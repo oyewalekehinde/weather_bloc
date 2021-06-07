@@ -38,6 +38,7 @@ class WeatherWidget extends StatelessWidget {
             Text(
               "Weather condition: ${weather.weather.first.description}",
               style: TextStyle(fontSize: 25),
+              key: ValueKey("weather condition"),
             ),
             Spacer(),
             Container(
@@ -63,7 +64,11 @@ class WeatherWidget extends StatelessWidget {
             ),
             SizedBox(
               height: screenHeight * 5,
-            )
+            ),
+            Text(
+              "${weather.name}",
+              style: TextStyle(fontSize: 0.1, color: Colors.white),
+            ),
           ],
         ),
       ),
