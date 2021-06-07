@@ -1,10 +1,12 @@
 import 'package:flutter_driver/flutter_driver.dart';
+import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 
 void main() {
+  final f = new DateFormat('hh:mm a');
   final enterCity = find.byValueKey("Enter city");
   final button = find.byValueKey("button");
-  final weather = find.byValueKey("weather condition");
+  final time = find.byValueKey("time");
   FlutterDriver driver;
   setUpAll(() async {
     driver = await FlutterDriver.connect();
@@ -20,7 +22,7 @@ void main() {
     await driver.tap(enterCity);
     await driver.enterText("Lagos");
     await driver.tap(button);
-    var result = await driver.getText(weather);
-    expect(result.startsWith("Weather"), "Weather condition: ");
+    var result = await driver.getText(time);
+    expect(result, "${f.format(DateTime.now())}");
   });
 }

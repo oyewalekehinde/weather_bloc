@@ -29,6 +29,7 @@ class WeatherWidget extends StatelessWidget {
           children: [
             Text(
               "${f.format(DateTime.now())}",
+              key: ValueKey("time"),
               style: TextStyle(fontSize: 80),
             ),
             Text(
